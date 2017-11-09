@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_bottom_padding">20dp</dimen>
+    <dimen name="btn_create_account_margin_bottom">32dp</dimen>
+    <dimen name="edit_text_margin_top">20dp</dimen>
+    <dimen name="textSizeSmall">13sp</dimen>
+    <dimen name="textSizeMedium">17sp</dimen>
+    <dimen name="textSizeLarge">20sp</dimen>
+    <dimen name="textSizeXLarge">24sp</dimen>
+    <dimen name="textSizeXXLarge">28sp</dimen>
+    <dimen name="margin_views">24dp</dimen>
+    <dimen name="padding_restore_password">16dp</dimen>
+    <dimen name="padding_left_views_auth">12dp</dimen>
+    <dimen name="registration_image_height">120dp</dimen>
+    <dimen name="registration_image_width">120dp</dimen>
+    <dimen name="registration_ll_margin">8dp</dimen>
+    <dimen name="registration_input_layout_margin_top">12dp</dimen>
+    <dimen name="registration_image_margin">16dp</dimen>
+    <dimen name="iv_height_in_fragment_view_pager">150dp</dimen>
+    <dimen name="margin_elements_vertical">16dp</dimen>
+    <dimen name="margin_elements_vertical_mobile">16dp</dimen>
+    <dimen name="margin_et_vertical_mobile">8dp</dimen>
+    <dimen name="button_height">48dp</dimen>
+    <dimen name="button_height_mobile">42dp</dimen>
+    <dimen name="height_views">42dp</dimen>
+    <dimen name="login_input_layout_margin_top">12dp</dimen>
+    <dimen name="margin_top_ll_vertical_mobile">12dp</dimen>
+    <dimen name="margin_button_login">42dp</dimen>
+
+</resources>
