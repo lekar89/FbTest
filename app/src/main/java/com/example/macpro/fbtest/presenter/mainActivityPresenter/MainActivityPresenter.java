@@ -36,19 +36,31 @@ public class MainActivityPresenter implements IMainActivityPresenter {
                 Log.d("1", object.toString());
                 SharedPreferencesHelper sph = SharedPreferencesHelper.getInstance();
                 try {
-                    String birthday = object.getString("birthday");
 
-                    sph.putStringValue(USER_ID, object.getString("id"));
-                    sph.putStringValue(USER_EMAIL, object.getString("email"));
-                    sph.putStringValue(USER_NAME, object.getString("name"));
-                    sph.putStringValue(USER_YEAR_OF_BIRTH, birthday.substring(birthday.lastIndexOf('/') + 1));
-                    sph.putStringValue(USER_PHOTO_URL, object.getJSONObject("picture").getJSONObject("data").getString("url"));
-                    mIMainActivity.gotoGallery();
+                    if (object.getString("id") != null) {
+                        sph.putStringValue(USER_ID, object.getString("id"));
+                    }
+                    if (object.getString("email") != null) {
+                        sph.putStringValue(USER_EMAIL, object.getString("email"));
+                    }
+                    if (object.getString("name") != null) {
+                        sph.putStringValue(USER_NAME, object.getString("name"));
+                    }
+                    if (object.getString("name") != null) {
+                        sph.putStringValue(USER_PHOTO_URL, object.getJSONObject("picture").getJSONObject("data").getString("url"));
+                    }
+                    if (object.getString("birthday") != null) {
+                        String birthday = object.getString("birthday");
+                        sph.putStringValue(USER_YEAR_OF_BIRTH, birthday.substring(birthday.lastIndexOf('/') + 1));
+                    }
+
                 } catch (JSONException e) {
                     Log.d(getClass().getName(), e.getMessage());
                 }
+                mIMainActivity.gotoGallery();
             }
         });
+
 
         Bundle parameters = new Bundle();
         parameters.putString("fields", "name,email,birthday,picture.type(large)");

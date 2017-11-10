@@ -1,7 +1,6 @@
 package com.example.macpro.fbtest.view.activitys;
 
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -17,7 +16,7 @@ import com.example.macpro.fbtest.view.fragments.redactProfileFragment.RedactProf
 public class GalleryActivity extends AppCompatActivity {
 
     private FragmentManager mFragmentManager;
-    DialogFragment dialogFragment;
+    private DialogFragment mDialogFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,12 +27,11 @@ public class GalleryActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         mFragmentManager = getSupportFragmentManager();
 
-        dialogFragment = new RedactProfileFragment();
+        mDialogFragment = new RedactProfileFragment();
 
         findViewById(R.id.fab).setOnClickListener(view -> {
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
-            dialogFragment.show(mFragmentManager, "dlg1");
+
+            mDialogFragment.show(mFragmentManager, "dlg1");
         });
 
         ListFragment listFragment = ListFragment.newInstance();
@@ -77,7 +75,7 @@ public class GalleryActivity extends AppCompatActivity {
         fragmentTransaction.setCustomAnimations(R.anim.pop_enter_animation, R.anim.pop_exit_animation,
                 R.anim.enter_animation, R.anim.exit_animation);
         fragmentTransaction
-                .remove(fragment)//, ((IBaseFragment) fragment).getCurrentTag())
+                .remove(fragment)
                 .replace(R.id.container_fragment, ListFragment.newInstance())
                 .commit();
     }

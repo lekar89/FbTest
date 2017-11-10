@@ -36,23 +36,23 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
             gotoGallery();
         }
 
-        loginButton.setReadPermissions(Arrays.asList("email", "user_photos", "public_profile"));
-        loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                mPresenter.getUserDetailsFromFB(loginResult.getAccessToken());
-            }
+        loginButton.setReadPermissions(Arrays.asList("email", "user_photos", "user_birthday", "public_profile"));
+                loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        mPresenter.getUserDetailsFromFB(loginResult.getAccessToken());
+                    }
 
-            @Override
-            public void onCancel() {
-                Log.d("Login", "cancel");
-            }
+                    @Override
+                    public void onCancel() {
+                        Log.d("Login", "cancel");
+                    }
 
-            @Override
-            public void onError(FacebookException exception) {
-                Log.d("Login", exception.getMessage());
-            }
-        });
+                    @Override
+                    public void onError(FacebookException exception) {
+                        Log.d("Login", exception.getMessage());
+                    }
+                });
     }
 
     @Override
@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         super.onActivityResult(requestCode, resultCode, data);
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
     }
+
     @Override
     public void gotoGallery() {
         startActivity(new Intent(MainActivity.this, GalleryActivity.class));

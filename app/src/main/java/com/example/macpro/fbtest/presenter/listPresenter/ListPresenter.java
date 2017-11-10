@@ -45,7 +45,6 @@ public class ListPresenter implements IListPresenter {
         if(!GreenDaoHelper.getListMapPartners().isEmpty()){
             mListFragment.setData(GreenDaoHelper.getListMapPartners());
             if (!InternetConnection.internetConnectionChecking(mContext)){
-                Log.d("2","no innet");
                 return;
 
             }

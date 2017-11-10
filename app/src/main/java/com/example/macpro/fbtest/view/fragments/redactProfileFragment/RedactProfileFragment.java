@@ -22,13 +22,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.macpro.fbtest.R;
 import com.example.macpro.fbtest.tools.CameraUtility;
 import com.example.macpro.fbtest.tools.Config;
 import com.example.macpro.fbtest.tools.ReadStorageUtility;
 import com.example.macpro.fbtest.tools.SharedPreferencesHelper;
 import com.example.macpro.fbtest.tools.WriteStorageUtility;
-import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -69,12 +69,14 @@ public class RedactProfileFragment extends DialogFragment {
         mEtEmail.setText(SharedPreferencesHelper.getInstance().getStringValue(Config.USER_EMAIL));
         mEtYearOfBirth.setText(SharedPreferencesHelper.getInstance().getStringValue(Config.USER_YEAR_OF_BIRTH));
         mLlRedactAvatar.setOnClickListener(v -> showDialog());
-        if(!imageUri.equals("")){
+
+        CameraUtility.checkPermission(getContext());
+        WriteStorageUtility.checkPermission(getContext());
+        ReadStorageUtility.checkPermission(getContext());
+        if (!imageUri.equals("")) {
             setImage(imageUri);
         }
-        WriteStorageUtility.checkPermission(getContext());
-        CameraUtility.checkPermission(getContext());
-        ReadStorageUtility.checkPermission(getContext());
+
         return view;
     }
 
@@ -100,7 +102,7 @@ public class RedactProfileFragment extends DialogFragment {
                 } else if (requestCode == RESULT_CAMERA) {
                     SharedPreferencesHelper.getInstance().putStringValue(Config.USER_PHOTO_URL, imageUri);
                     setImage(imageUri);
-                    Log.d("PathC", imageUri.toString());
+                    Log.d("PathC", imageUri);
                 } else {
                     Toast.makeText(getContext(), getContext().getString(R.string.no_image_selected),
                             Toast.LENGTH_SHORT).show();
@@ -111,7 +113,7 @@ public class RedactProfileFragment extends DialogFragment {
 
     private File getOutputMediaFile() {
         File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_DCIM), "loyality_profile_photo");
+                Environment.DIRECTORY_DCIM), "fb_photo");
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
                 return null;
@@ -152,11 +154,11 @@ public class RedactProfileFragment extends DialogFragment {
                         if (CameraUtility.checkPermission(getContext())) {
                             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                             Uri uri = null;
-                            if (Build.VERSION.SDK_INT >= 24){
+                            if (Build.VERSION.SDK_INT >= 24) {
                                 uri = FileProvider.getUriForFile(getContext(),
                                         getActivity().getApplicationContext().getPackageName()
                                                 + ".my.package.name.provider", getOutputMediaFile());
-                            }else {
+                            } else {
                                 uri = Uri.fromFile(getOutputMediaFile());
                             }
                             imageUri = uri.toString();
@@ -177,27 +179,25 @@ public class RedactProfileFragment extends DialogFragment {
 
         AlertDialog alert = builder.create();
         alert.show();
+        CameraUtility.checkPermission(getContext());
     }
 
     private void setImage(String uri) {
-        if (WriteStorageUtility.checkPermission(getContext())
-                && ReadStorageUtility.checkPermission(getContext())) {
+//        if (WriteStorageUtility.checkPermission(getContext())
+//                & ReadStorageUtility.checkPermission(getContext()) & CameraUtility.checkPermission(getContext()))
 
+            Glide.with(getContext())
+                .load(uri)
+                .into(mIvUserLogo);
 
-            Picasso.with(getContext())
-                    .load(uri)
-                    .placeholder(R.drawable.com_facebook_favicon_blue)
-                    .error(R.drawable.com_facebook_favicon_blue)
-                    .into(mIvUserLogo);
-
-        }
     }
+
 
     public String getRealPathFromURI(Uri uri) {
         String result;
         Cursor cursor = getActivity().getContentResolver().query(uri, null,
                 null, null, null);
-        if (cursor == null) { // Source is Dropbox or other similar local file path
+        if (cursor == null) {
             result = uri.getPath();
         } else {
             cursor.moveToFirst();
