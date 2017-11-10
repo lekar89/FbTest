@@ -7,9 +7,6 @@ import com.example.macpro.fbtest.model.data.DaoSession;
 
 import org.greenrobot.greendao.database.Database;
 
-/**
- * Created by San4o on 07.11.2017.
- */
 
 public class App extends Application {
 

@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         mPresenter = new MainActivityPresenter(this);
 
         if (mPresenter.isLogged()) {
-//            gotoGallary();
+            gotoGallery();
         }
 
         loginButton.setReadPermissions(Arrays.asList("email", "user_photos", "public_profile"));
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
     }
     @Override
-    public void gotoGallary() {
+    public void gotoGallery() {
         startActivity(new Intent(MainActivity.this, GalleryActivity.class));
         finish();
     }

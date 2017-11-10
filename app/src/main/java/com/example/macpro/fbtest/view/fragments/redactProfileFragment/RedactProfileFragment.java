@@ -22,13 +22,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.example.macpro.fbtest.R;
 import com.example.macpro.fbtest.tools.CameraUtility;
 import com.example.macpro.fbtest.tools.Config;
 import com.example.macpro.fbtest.tools.ReadStorageUtility;
 import com.example.macpro.fbtest.tools.SharedPreferencesHelper;
 import com.example.macpro.fbtest.tools.WriteStorageUtility;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -183,9 +183,13 @@ public class RedactProfileFragment extends DialogFragment {
         if (WriteStorageUtility.checkPermission(getContext())
                 && ReadStorageUtility.checkPermission(getContext())) {
 
-            Glide.with(getContext())
+
+            Picasso.with(getContext())
                     .load(uri)
+                    .placeholder(R.drawable.com_facebook_favicon_blue)
+                    .error(R.drawable.com_facebook_favicon_blue)
                     .into(mIvUserLogo);
+
         }
     }
 

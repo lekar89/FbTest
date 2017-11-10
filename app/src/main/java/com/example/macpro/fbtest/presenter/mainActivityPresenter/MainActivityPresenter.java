@@ -43,7 +43,7 @@ public class MainActivityPresenter implements IMainActivityPresenter {
                     sph.putStringValue(USER_NAME, object.getString("name"));
                     sph.putStringValue(USER_YEAR_OF_BIRTH, birthday.substring(birthday.lastIndexOf('/') + 1));
                     sph.putStringValue(USER_PHOTO_URL, object.getJSONObject("picture").getJSONObject("data").getString("url"));
-                    mIMainActivity.gotoGallary();
+                    mIMainActivity.gotoGallery();
                 } catch (JSONException e) {
                     Log.d(getClass().getName(), e.getMessage());
                 }

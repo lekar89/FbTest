@@ -21,7 +21,6 @@ public class ListFragment extends Fragment implements IListFragment {
 
     private RecyclerView mRvListImages;
     private IListPresenter mPresenter;
-    //    private List<String> list;
     private ImageListAdapter mAdapter;
 
     public ListFragment() {
